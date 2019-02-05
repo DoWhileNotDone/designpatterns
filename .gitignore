@@ -1,0 +1,7 @@
+/vendor/
+.vagrant/
+/logs/*
+!/logs/.keep
+.env
+vendor/
+composer.phar
