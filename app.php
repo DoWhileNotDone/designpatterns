@@ -19,8 +19,8 @@ $dotenv = Dotenv\Dotenv::create(__DIR__);
 $dotenv->load();
 
 if (getenv("DEBUG")) {
-  error_reporting(E_ALL);
-  ini_set("display_errors", "true");
+    error_reporting(E_ALL);
+    ini_set("display_errors", "true");
 }
 
 // Instantiate the app
@@ -34,7 +34,7 @@ require __DIR__ . '/config/dependencies.php';
 require __DIR__ . '/config/middleware.php';
 
 // Register routes
-require __DIR__ . '/config/routes.php';
+require __DIR__ . '/routes/default.php';
 
 // Run app
 $app->run();
