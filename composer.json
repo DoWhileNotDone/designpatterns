@@ -1,14 +1,14 @@
 {
-    "name": "slim/slim-skeleton",
-    "description": "A Slim Framework skeleton application for rapid development",
-    "keywords": ["microframework", "rest", "router", "psr7"],
-    "homepage": "http://github.com/slimphp/Slim-Skeleton",
+    "name": "designpatterns",
+    "description": "Pootling around with design patterns using php/slim",
+    "keywords": ["slim", "php", "design patters"],
+    "homepage": "http://www.github.com/davegthemighty/designpatterns",
     "license": "MIT",
     "authors": [
         {
             "name": "Dave",
             "email": "dave@example.com",
-            "homepage": "http://www.gihub.com/davegthemighty"
+            "homepage": "http://www.github.com/davegthemighty"
         }
     ],
     "require": {
