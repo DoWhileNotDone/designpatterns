@@ -1,2 +1,12 @@
-Linter/psr
-DocBlock
+
+ * IDE
+
+ * Front End
+  - Twig Base
+  - SASS/SCSS
+  - JS - Type Script/Other
+  - Bootstrap - https://forums.meteor.com/t/the-way-to-use-bootstrap-4-from-npm-including-js-and-tether/23159
+
+ * Singleton
+   - Update Template
+   - Unit Test

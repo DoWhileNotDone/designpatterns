@@ -24,7 +24,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "shell", name: "apt", inline: <<-SHELL
     export DEBIAN_FRONTEND=noninteractive
     apt-get update && apt-get upgrade
-    apt-get install -y wget unzip
+    packagelist=(
+      libssl1.0-dev
+      libreadline-dev
+      libyaml-dev
+      libxml2-dev
+      libxslt1-dev
+      libnss3
+      libx11-dev
+      software-properties-common
+      wget
+      unzip
+      curl
+    )
+    apt-get install -y ${packagelist[@]}
   SHELL
 
   config.vm.provision "shell", name: "install apache", inline: <<-'SHELL'
@@ -33,7 +46,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ufw allow 'Apache'
   SHELL
 
-  # Make sure logs folder is owned by apache with group vagrant
+  #Make sure logs folder is owned by apache with group vagrant
   config.vm.synced_folder "logs", "/vagrant/logs", owner: "www-data", group: "vagrant"
 
   config.vm.provision "shell", name: "install php", inline: <<-SHELL
@@ -59,11 +72,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   SHELL
 
   # Install Composer
-  config.vm.provision "shell", name: "install composer", inline: <<-SHELL
+  config.vm.provision "shell", name: "install composer", privileged: false, inline: <<-SHELL
      cd /vagrant && curl -sS https://getcomposer.org/installer | php
   SHELL
 
-  # Update Apache config and restart
+  #Update Apache config and restart
   config.vm.provision "shell", name: "configure apache", inline: <<-'SHELL'
 
     # Symlink DocumentRoot o \Vagrant\Public
@@ -79,8 +92,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   SHELL
 
   #Install project composer dependencies
-  config.vm.provision "shell", name: "run composer", inline: <<-SHELL
+  config.vm.provision "shell", name: "run composer", privileged: false, inline: <<-SHELL
     cd /vagrant && php composer.phar install --no-suggest --no-progress
+  SHELL
+
+  #Install project npm dependencies
+  config.vm.provision "shell", name: "install nvm and node", privileged: false, inline: <<-SHELL
+    export DEBIAN_FRONTEND=noninteractive
+    cd && curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+    nvm install node
+    nvm use node
+    cd /vagrant && npm install
   SHELL
 
   # Use the provided example environment
