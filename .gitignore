@@ -1,8 +1,12 @@
-/vendor/
 .vagrant/
 /logs/*
 !/logs/.keep
-.env
 vendor/
-composer.phar
 node_modules/
+public/css/*
+!public/css/.keep
+public/js/*
+!public/js/.keep
+.env
+composer.phar
+TODO

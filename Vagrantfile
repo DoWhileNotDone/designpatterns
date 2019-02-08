@@ -106,6 +106,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     nvm install node
     nvm use node
     cd /vagrant && npm install
+    npm install -g gulp
+    cd /vagrant && gulp
   SHELL
 
   # Use the provided example environment

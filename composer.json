@@ -1,7 +1,7 @@
 {
-    "name": "designpatterns",
+    "name": "davegthemighty/designpatterns",
     "description": "Pootling around with design patterns using php/slim",
-    "keywords": ["slim", "php", "design patters"],
+    "keywords": ["slim", "php", "design patterns"],
     "homepage": "http://www.github.com/davegthemighty/designpatterns",
     "license": "MIT",
     "authors": [
