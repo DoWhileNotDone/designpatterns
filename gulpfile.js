@@ -42,3 +42,5 @@ gulp.task('watch', gulp.parallel('watch:styles'));
 
 // Default Task (https://fettblog.eu/gulp-4-parallel-and-series/)
 gulp.task('default', gulp.series('scripts', 'sass', 'watch'));
+
+gulp.task('vagrant', gulp.series('scripts', 'sass'));

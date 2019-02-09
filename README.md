@@ -19,6 +19,8 @@ Tools used:
 - [NVM](https://github.com/creationix/nvm)
 - [Gulp](https://gulpjs.com/)
 - [SASS](https://sass-lang.com/guide)
+- [Twig](https://twig.symfony.com/)
+- [Twig View](https://github.com/slimphp/Twig-View)
 
 Running Instructions are to be found below.
 

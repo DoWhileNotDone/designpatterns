@@ -5,6 +5,9 @@ if !Vagrant::Util::Platform.windows?
           echo 'Setting group write permissions for ./logs/*'
           chmod 775 ./logs
           chmod 664 ./logs/*
+          echo 'Setting group write permissions for ./cache/*'
+          chmod 775 ./cache
+          chmod 664 ./cache/*
       fi
   ")
 end
@@ -46,8 +49,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ufw allow 'Apache'
   SHELL
 
-  #Make sure logs folder is owned by apache with group vagrant
+  #Make sure logs and cache folder is owned by apache with group vagrant
   config.vm.synced_folder "logs", "/vagrant/logs", owner: "www-data", group: "vagrant"
+  config.vm.synced_folder "cache", "/vagrant/cache", owner: "www-data", group: "vagrant"
 
   config.vm.provision "shell", name: "install php", inline: <<-SHELL
 
@@ -107,7 +111,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     nvm use node
     cd /vagrant && npm install
     npm install -g gulp
-    cd /vagrant && gulp
+    cd /vagrant && gulp vagrant
   SHELL
 
   # Use the provided example environment
