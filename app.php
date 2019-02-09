@@ -18,13 +18,14 @@ require __DIR__ . "/vendor/autoload.php";
 $dotenv = Dotenv\Dotenv::create(__DIR__);
 $dotenv->load();
 
-if (getenv("DEBUG")) {
+// Instantiate the app
+$settings = require __DIR__ . '/config/settings.php';
+
+if ($settings['displayErrorDetails']) {
     error_reporting(E_ALL);
     ini_set("display_errors", "true");
 }
 
-// Instantiate the app
-$settings = require __DIR__ . '/config/settings.php';
 $app = new \Slim\App($settings);
 
 // Set up dependencies
@@ -35,6 +36,7 @@ require __DIR__ . '/config/middleware.php';
 
 // Register routes
 require __DIR__ . '/routes/default.php';
+//require __DIR__ . '/routes/singleton.php';
 
 // Run app
 $app->run();
